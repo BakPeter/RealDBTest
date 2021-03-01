@@ -11,21 +11,33 @@ import com.bpapps.realmdbtest.repository.localdata.model.RealmPerson;
 import java.util.List;
 
 public class MainViewModel extends ViewModel implements RealmDBHandler.IDataSetChangedListener {
-    private RealmDBHandler mRealmDBHandler = RealmDBHandler
-//            .getInstance()
-            .init(RealmDBTestApp.getAppContext())
-            .registerForDataDataSetChangesListener(this);
+    private RealmDBHandler mRealmDBHandler = null;
+//            RealmDBHandler.getInstance();
+//            .init(RealmDBTestApp.getAppContext())
+//            .registerForDataDataSetChangesListener(this);
 
     private MutableLiveData<List<RealmPerson>> persons = new MutableLiveData<>();
 
     public void savePerson(RealmPerson realmPerson) {
+        if (mRealmDBHandler == null) {
+            initRealmDataBase();
+        }
         mRealmDBHandler.savePerson(realmPerson);
     }
 
     public LiveData<List<RealmPerson>> getAllPersons() {
+        if (mRealmDBHandler == null) {
+            initRealmDataBase();
+        }
         List<RealmPerson> dataSet = mRealmDBHandler.getAllPersons();
         persons.postValue(dataSet);
         return persons;
+    }
+
+    private void initRealmDataBase() {
+        mRealmDBHandler = RealmDBHandler
+                .init(RealmDBTestApp.getAppContext())
+                .registerForDataDataSetChangesListener(this);
     }
 
     @Override
@@ -36,7 +48,7 @@ public class MainViewModel extends ViewModel implements RealmDBHandler.IDataSetC
     @Override
     protected void onCleared() {
         super.onCleared();
-
         mRealmDBHandler.unRegisterForDataDataSetChangesListener();
+
     }
 }

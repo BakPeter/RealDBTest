@@ -14,9 +14,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        RealmDBHandler.init(RealmDBTestApp.getAppContext());
+
 //        getSupportFragmentManager().beginTransaction()
 //                .replace(R.id.fragment_container, MainFragment.newInstance())
 //                .commit();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override

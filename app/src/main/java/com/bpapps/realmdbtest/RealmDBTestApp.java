@@ -3,6 +3,8 @@ package com.bpapps.realmdbtest;
 import android.app.Application;
 import android.content.Context;
 
+import com.bpapps.realmdbtest.repository.localdata.RealmDBHandler;
+
 public class RealmDBTestApp extends Application {
     private static final String TAG = "TAG.RealmDBTestApp";
 
@@ -20,7 +22,6 @@ public class RealmDBTestApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-//        RealmDBHandler.init(this);
         sInstance = this;
     }
 }

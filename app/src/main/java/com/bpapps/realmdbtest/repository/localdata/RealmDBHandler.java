@@ -45,7 +45,6 @@ public class RealmDBHandler extends Realm.Callback {
                 .allowQueriesOnUiThread(true)
                 .allowWritesOnUiThread(true)
                 .compactOnLaunch()
-                .inMemory()
                 .build();
 //        Realm.getInstanceAsync(mRealmConfiguration, this);
         mRealm = Realm.getInstance(mRealmConfiguration);
