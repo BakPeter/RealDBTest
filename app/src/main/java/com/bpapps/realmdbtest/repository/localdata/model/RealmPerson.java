@@ -5,13 +5,16 @@ import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 
 public class RealmPerson extends RealmObject {
+    public static final String PRIMARY_ID = "mLastName";
     private static int sIdCreator = 0;
 
+//    @PrimaryKey
+//    private int mId;
+
     @PrimaryKey
-    private int mId;
+    private String mLastName;
 
     @Required
-    private String mLastName;
     private String mFirstName;
     private int mAge;
 
@@ -20,7 +23,7 @@ public class RealmPerson extends RealmObject {
     public RealmPerson(String mLastName, String mFirstName, int mAge) {
         sIdCreator++;
 
-        this.mId = sIdCreator;
+//        this.mId = sIdCreator;
         this.mLastName = mLastName;
         this.mFirstName = mFirstName;
         this.mAge = mAge;
@@ -31,13 +34,13 @@ public class RealmPerson extends RealmObject {
         return mLastName + " " + mFirstName + ", " + mAge;
     }
 
-    public int getId() {
-        return mId;
-    }
-
-    public void setId(int mId) {
-        this.mId = mId;
-    }
+//    public int getId() {
+//        return mId;
+//    }
+//
+//    public void setId(int mId) {
+//        this.mId = mId;
+//    }
 
     public String getLastName() {
         return mLastName;

@@ -17,12 +17,28 @@ public class MainViewModel extends ViewModel implements RealmDBHandler.IDataSetC
 //            .registerForDataDataSetChangesListener(this);
 
     private MutableLiveData<List<RealmPerson>> persons = new MutableLiveData<>();
+    private MutableLiveData<RealmPerson> searchedPerson = new MutableLiveData<>();
 
     public void savePerson(RealmPerson realmPerson) {
         if (mRealmDBHandler == null) {
             initRealmDataBase();
         }
         mRealmDBHandler.savePerson(realmPerson);
+    }
+
+    public LiveData<RealmPerson> getPersonByName(String name) {
+        if (mRealmDBHandler == null) {
+            initRealmDataBase();
+        }
+
+        if (name != null) {
+            RealmPerson person = mRealmDBHandler.getPersonByName(name);
+            searchedPerson.postValue(person);
+        } else {
+            searchedPerson.postValue(null);
+        }
+
+        return searchedPerson;
     }
 
     public LiveData<List<RealmPerson>> getAllPersons() {
